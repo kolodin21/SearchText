@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Главная страница";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Заметки</title>
+    <!-- Подключение jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Подключение CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div id="mainContainer">
+        <!-- Блок поиска -->
+        <section id="searchBlock">
+            <h3>Поиск заметок</h3>
+            <div style="position: relative;">
+                <input type="text"
+                       id="searchBox"
+                       placeholder="Введите текст для поиска"
+                       autocomplete="off"
+                       style="width: 300px; padding: 10px;">
+                <div id="suggestionsBox" class="suggestions"></div>
+            </div>
+        </section>
+
+        <!-- Блок добавления -->
+        <section id="addBlock">
+            <h3>Добавление новой заметки</h3>
+            <div>
+                <input type="text"
+                       id="noteInput"
+                       placeholder="Введите заголовок новой заметки"
+                       style="width: 300px; padding: 10px;">
+            </div>
+            <button id="addNoteButton">Добавить</button>
+        </section>
+    </div>
+    <script src="~/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+﻿body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh; /* Для предотвращения изменения размера */
+    background-color: #808080;
+}
+
+#mainContainer {
+    display: flex;
+    gap: 40px;
+    min-height: 300px; /* Фиксированная минимальная высота */
+}
+
+#searchBlock, #addBlock {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+#searchBox, #noteInput {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+#addNoteButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+    #addNoteButton:hover {
+        background-color: #0056b3;
+    }
+
+#suggestionsBox {
+    position: absolute;
+    top: 100%; /* Под полем ввода */
+    left: 0;
+    width: 300px;
+    max-height: 200px; /* Ограничиваем высоту */
+    overflow-y: auto; /* Включаем прокрутку */
+    border: 2px solid #ccc;
+    background-color: white;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+    #suggestionsBox div:hover {
+        background-color: #808080; /* Цвет при наведении */
+    }
