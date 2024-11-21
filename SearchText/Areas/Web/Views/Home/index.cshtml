@@ -20,8 +20,13 @@
                 <input type="text"
                        id="searchBox"
                        placeholder="Введите текст для поиска"
-                       autocomplete="off"
-                       style="width: 300px; padding: 10px;">
+                       autocomplete="off"; />
+
+                <select id="searchType">
+                    <option value="substring">По подстроке</option>
+                    <option value="startswith">По первым буквам</option>
+                </select>
+
                 <div id="suggestionsBox" class="suggestions"></div>
             </div>
         </section>
@@ -32,8 +37,7 @@
             <div>
                 <input type="text"
                        id="noteInput"
-                       placeholder="Введите заголовок новой заметки"
-                       style="width: 300px; padding: 10px;">
+                       placeholder="Введите заголовок новой заметки"; />
             </div>
             <button id="addNoteButton">Добавить</button>
         </section>

@@ -3,29 +3,41 @@
 
     // Обработка ввода в поле поиска
     $('#searchBox').on('input', function () {
+
         const query = $(this).val().trim();
+        const searchType = $('#searchType').val(); // Получаем выбранный тип поиска
 
         clearTimeout(timer);
 
-        if (query.length >= 1) {
-            timer = setTimeout(() => {
-                fetch(`/api/notes/search?search=${query}`)
-                    .then(response => {
-                        if (!response.ok) {
+        if (query.length >= 1)
+        {
+            timer = setTimeout(() =>
+            {
+                fetch(`/api/notes/search?search=${query}&SortItem=${searchType}`)
+                    .then(response =>
+                    {
+                        if (!response.ok)
+                        {
                             throw new Error('Ошибка поиска');
                         }
                         return response.json();
                     })
-                    .then(data => {
+                    .then(data =>
+                    {
                         const suggestionsBox = $('#suggestionsBox');
                         suggestionsBox.empty();
 
-                        if (data.length === 0) {
+                        if (data.length === 0)
+                        {
                             suggestionsBox.append('<div>Ничего не найдено</div>');
-                        } else {
-                            data.forEach(item => {
+                        }
+                        else
+                        {
+                            data.forEach(item =>
+                            {
                                 const suggestion = $(`<div>${item}</div>`);
-                                suggestion.on('click', function () {
+                                suggestion.on('click', function ()
+                                {
                                     $('#searchBox').val($(this).text());
                                     suggestionsBox.empty();
                                 });
@@ -35,32 +47,42 @@
                     })
                     .catch(error => console.error('Ошибка при поиске:', error));
             },150); // Задержка 150 мс
-        } else {
+        }
+        else
+        {
             $('#suggestionsBox').empty();
         }
     });
 
     // Обработка кнопки добавления заметки
-    $('#addNoteButton').on('click', function () {
+    $('#addNoteButton').on('click', function ()
+    {
         const noteTitle = $('#noteInput').val().trim();
 
-        if (noteTitle === "") {
+        if (noteTitle === "")
+        {
             alert("Введите заголовок заметки!");
             return;
         }
 
-        fetch('/api/notes/add', {
+        fetch('/api/notes/add',
+            {
             method: 'POST',
-            headers: {
+            headers:
+            {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ title: noteTitle })
         })
-            .then(response => {
-                if (response.ok) {
+            .then(response =>
+            {
+                if (response.ok)
+                {
                     alert('Заметка успешно добавлена!');
                     $('#noteInput').val('');
-                } else {
+                }
+                else
+                {
                     alert('Ошибка при добавлении заметки');
                 }
             })
@@ -70,11 +92,13 @@
     $(document).ready(function () {
         console.log('JavaScript подключен и работает');
 
-        $('#searchBox').on('input', function () {
+        $('#searchBox').on('input', function ()
+        {
             console.log('Событие input сработало');
         });
 
-        $('#addNoteButton').on('click', function () {
+        $('#addNoteButton').on('click', function ()
+        {
             console.log('Событие click сработало');
         });
     });

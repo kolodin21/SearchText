@@ -30,6 +30,12 @@
     margin-top: 10px;
 }
 
+#searchType {
+    margin-left: 10px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
 #addNoteButton {
     padding: 10px 20px;
     background-color: #007bff;

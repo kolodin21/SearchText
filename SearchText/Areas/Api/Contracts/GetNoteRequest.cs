@@ -1,4 +1,4 @@
 ﻿namespace Notes.Areas.Api.Contracts
 {
-    public record GetNoteRequest(string? Search);
+    public record GetNoteRequest(string? Search,string SortItem);
 }

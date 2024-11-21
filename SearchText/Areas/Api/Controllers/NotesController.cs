@@ -28,22 +28,38 @@ namespace Notes.Areas.Api.Controllers
             if (string.IsNullOrEmpty(request.Search))
                 return Ok(Array.Empty<string>());
 
-            //Этот метод предпочтительнее, но SQlite не поддерживает поиск с учетом регистра 
-            //var results = await dbContext.Notes
-            //    .Where(p => EF.Functions.Like(p.Title.ToLower(), $"{request.Search.ToLower()}%")) // Поиск по первым буквам
-            //    .Select(p => p.Title) // Выбираем поле Title
-            //    .ToListAsync(); // Получаем данные из базы данных
+            try
+            {
+                var lowerSearch = request.Search.ToLower();
+                IEnumerable<string> query = await dbContext.Notes
+                    .Select(p => p.Title)
+                    .ToListAsync(); // Получаем все заголовки (минимизация нагрузки на запрос)
 
-            var results = await dbContext.Notes
-                .Select(p => p.Title) // Сначала получаем все данные
-                .ToListAsync();
+                //Лучше этот вариант, но SQlite не поддерживает такой запрос
+                //query = request.SortItem.ToLower() switch
+                //{
+                //    "startswith" => query.Where(title => EF.Functions.Like(title, $"{request.Search}%")),
+                //    "substring" => query.Where(title => EF.Functions.Like(title, $"%{request.Search}%")),
+                //    _ => throw new ArgumentException("Некорректный тип поиска. Укажите 'startswith' или 'substring'.")
+                //};
 
-            // Затем применяем фильтрацию по поисковому запросу на стороне клиента
-            var filteredResults = results
-                .Where(title => title.ToLower().StartsWith(request.Search.ToLower())) // Поиск по первым буквам
-                .ToList();
+                var filteredResults = request.SortItem.ToLower() switch
+                {
+                    "startswith" => query.Where(title => title.ToLower().StartsWith(lowerSearch)),
+                    "substring" => query.Where(title => title.ToLower().Contains(lowerSearch)),
+                    _ => throw new ArgumentException("Некорректный тип поиска. Укажите 'startswith' или 'substring'.")
+                };
 
-            return Ok(filteredResults);
+                return Ok(filteredResults.ToList());
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Произошла ошибка сервера.");
+            }
         }
     }
 }
