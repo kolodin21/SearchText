@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SearchText.Models;
+using Notes.Models;
 
 namespace Notes.DataAccess
 {

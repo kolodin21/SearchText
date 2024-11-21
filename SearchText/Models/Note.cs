@@ -1,4 +1,4 @@
-﻿namespace SearchText.Models
+﻿namespace Notes.Models
 {
     public class Note
     {

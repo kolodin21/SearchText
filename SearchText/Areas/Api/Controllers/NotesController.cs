@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Notes.Areas.Api.Contracts;
 using Notes.DataAccess;
-using SearchText.Models;
+using Notes.Models;
 
 namespace Notes.Areas.Api.Controllers
 {
