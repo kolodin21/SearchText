@@ -7,7 +7,7 @@
 
         clearTimeout(timer);
 
-        if (query.length > 2) {
+        if (query.length >= 1) {
             timer = setTimeout(() => {
                 fetch(`/api/notes/search?search=${query}`)
                     .then(response => {
@@ -34,7 +34,7 @@
                         }
                     })
                     .catch(error => console.error('Ошибка при поиске:', error));
-            }, 300); // Задержка 300 мс
+            },150); // Задержка 150 мс
         } else {
             $('#suggestionsBox').empty();
         }
